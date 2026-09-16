@@ -1,0 +1,160 @@
+# JDBC Student CRUD Application
+
+A simple **CLI-based Java application** that performs CRUD operations on a MySQL database using **JDBC (Java Database Connectivity)**.
+
+## Project Overview
+
+This project demonstrates how Java applications communicate with a real MySQL database using JDBC.
+
+The application allows users to:
+
+* Create a student
+* View all students
+* Update student details
+* Delete a student
+* Exit the application
+
+## Technologies Used
+
+* Java 21
+* JDBC
+* MySQL
+* Eclipse IDE
+* MySQL Connector/J
+
+## Database
+
+Database name:
+
+```text
+studentdb
+```
+
+Table:
+
+```text
+student
+```
+
+Table structure:
+
+| Column | Type         | Description                 |
+| ------ | ------------ | --------------------------- |
+| id     | INT          | Primary key, auto-increment |
+| name   | VARCHAR(100) | Student name                |
+| age    | INT          | Student age                 |
+| course | VARCHAR(100) | Student course              |
+
+## CRUD Operations
+
+### Create
+
+Adds a new student to the database.
+
+### Read
+
+Displays all students stored in the database.
+
+### Update
+
+Updates the details of an existing student.
+
+### Delete
+
+Removes a student from the database.
+
+## JDBC Concepts Used
+
+* `Connection`
+* `DriverManager`
+* `PreparedStatement`
+* `ResultSet`
+* `executeUpdate()`
+* `executeQuery()`
+* Exception handling
+* Closing database resources
+
+## Prepared Statements
+
+This project uses `PreparedStatement` instead of string concatenation for SQL queries.
+
+Example:
+
+```java
+String sql = "INSERT INTO student(name, age, course) VALUES (?, ?, ?)";
+
+PreparedStatement ps = connection.prepareStatement(sql);
+
+ps.setString(1, name);
+ps.setInt(2, age);
+ps.setString(3, course);
+
+ps.executeUpdate();
+```
+
+Using prepared statements helps prevent SQL injection and makes parameterized database operations safer.
+
+## Project Structure
+
+```text
+JDBCStudentCRUD
+│
+├── src
+│   ├── DBConnection.java
+│   ├── Student.java
+│   ├── StudentDAO.java
+│   ├── Main.java
+│   └── TestConnection.java
+│
+└── README.md
+```
+
+## Database Setup
+
+Create the database and table in MySQL:
+
+```sql
+CREATE DATABASE studentdb;
+
+USE studentdb;
+
+CREATE TABLE student (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT,
+    course VARCHAR(100)
+);
+```
+
+## Configuration
+
+Update the MySQL username and password in `DBConnection.java`:
+
+```java
+private static final String URL = "jdbc:mysql://localhost:3306/studentdb";
+private static final String USER = "root";
+private static final String PASSWORD = "YOUR_MYSQL_PASSWORD";
+```
+
+**Do not upload your actual database password to GitHub.**
+
+## How to Run
+
+1. Install Java.
+2. Install MySQL.
+3. Create the `studentdb` database and `student` table.
+4. Add MySQL Connector/J to the Eclipse project.
+5. Update the database credentials.
+6. Run `Main.java`.
+7. Select the required CRUD operation from the menu.
+
+## Learning Outcome
+
+Through this project, I learned how to:
+
+* Connect Java applications to MySQL using JDBC.
+* Perform CRUD operations.
+* Use `PreparedStatement` for SQL queries.
+* Work with `ResultSet`.
+* Manage database connections and statements.
+* Build a command-line database application.
